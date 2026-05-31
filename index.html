@@ -409,6 +409,44 @@
   .territory-map {
     width: 100%; height: auto; display: block;
   }
+  .territory-map-frame {
+    position: relative;
+    width: 100%;
+    line-height: 0;
+  }
+  .territory-map-img {
+    width: 100%; height: auto; display: block;
+    opacity: 0;
+    transform: scale(0.985);
+    filter: drop-shadow(0 18px 40px rgba(13,13,13,0.22));
+    transition: opacity 1.3s ease, transform 1.3s cubic-bezier(.2,.6,.2,1);
+  }
+  .territory-panel.visible .territory-map-img {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .territory-vail-pulse {
+    position: absolute;
+    width: 12px; height: 12px;
+    /* Vail marker sits roughly center-right of Colorado tile */
+    left: 66%; top: 66%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s ease 1.4s;
+  }
+  .territory-panel.visible .territory-vail-pulse { opacity: 1; }
+  .territory-vail-pulse::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--red);
+    animation: vailMapPulse 2.4s ease-out infinite;
+  }
+  @keyframes vailMapPulse {
+    0%   { transform: scale(1);   opacity: 0.8; }
+    100% { transform: scale(3.6); opacity: 0; }
+  }
   .state-shape {
     fill: rgba(13,13,13,0.025);
     stroke: var(--text-light);
@@ -1359,74 +1397,10 @@
       <div class="territory-panel reveal">
     <div class="territory-map-wrap">
       <div class="territory-map-label">Territory <span>&mdash;</span> CO &middot; UT &middot; WY &middot; MT</div>
-      <svg class="territory-map" viewBox="0 0 600 460" aria-hidden="true">
-        <g class="states">
-          <path class="state-shape" d="M 30 35 H 560 V 170 H 30 Z" />
-          <path class="state-shape" d="M 240 170 H 460 V 310 H 240 Z" />
-          <path class="state-shape" d="M 90 200 H 240 V 380 H 90 Z" />
-          <path class="state-shape" d="M 240 310 H 460 V 440 H 240 Z" />
-        </g>
-        <g class="state-labels">
-          <text x="295" y="115">MT</text>
-          <text x="350" y="245">WY</text>
-          <text x="165" y="295">UT</text>
-          <text x="350" y="380">CO</text>
-        </g>
-        <g class="account-dots">
-          <!-- MT dots (batch 1) -->
-          <circle class="account-dot" cx="80" cy="85" />
-          <circle class="account-dot" cx="135" cy="60" />
-          <circle class="account-dot" cx="170" cy="110" />
-          <circle class="account-dot" cx="230" cy="80" />
-          <circle class="account-dot" cx="290" cy="130" />
-          <circle class="account-dot" cx="345" cy="95" />
-          <circle class="account-dot" cx="425" cy="120" />
-          <circle class="account-dot" cx="490" cy="80" />
-          <!-- WY dots (batch 2) -->
-          <circle class="account-dot batch-2" cx="260" cy="200" />
-          <circle class="account-dot batch-2" cx="290" cy="260" />
-          <circle class="account-dot batch-2" cx="325" cy="220" />
-          <circle class="account-dot batch-2" cx="355" cy="280" />
-          <circle class="account-dot batch-2" cx="395" cy="240" />
-          <circle class="account-dot batch-2" cx="425" cy="200" />
-          <circle class="account-dot batch-2" cx="445" cy="285" />
-          <!-- UT dots (batch 3) -->
-          <circle class="account-dot batch-3" cx="140" cy="225" />
-          <circle class="account-dot batch-3" cx="175" cy="210" />
-          <circle class="account-dot batch-3" cx="200" cy="225" />
-          <circle class="account-dot batch-3" cx="180" cy="250" />
-          <circle class="account-dot batch-3" cx="215" cy="265" />
-          <circle class="account-dot batch-3" cx="160" cy="295" />
-          <circle class="account-dot batch-3" cx="125" cy="330" />
-          <circle class="account-dot batch-3" cx="180" cy="325" />
-          <circle class="account-dot batch-3" cx="210" cy="350" />
-          <circle class="account-dot batch-3" cx="140" cy="365" />
-          <circle class="account-dot batch-3" cx="170" cy="370" />
-          <circle class="account-dot batch-3" cx="115" cy="265" />
-          <!-- CO dots (batch 4) -->
-          <circle class="account-dot batch-4" cx="260" cy="335" />
-          <circle class="account-dot batch-4" cx="285" cy="360" />
-          <circle class="account-dot batch-4" cx="305" cy="335" />
-          <circle class="account-dot batch-4" cx="320" cy="370" />
-          <circle class="account-dot batch-4" cx="350" cy="385" />
-          <circle class="account-dot batch-4" cx="375" cy="355" />
-          <circle class="account-dot batch-4" cx="395" cy="375" />
-          <circle class="account-dot batch-4" cx="415" cy="335" />
-          <circle class="account-dot batch-4" cx="430" cy="365" />
-          <circle class="account-dot batch-4" cx="445" cy="395" />
-          <circle class="account-dot batch-4" cx="275" cy="400" />
-          <circle class="account-dot batch-4" cx="310" cy="415" />
-          <circle class="account-dot batch-4" cx="365" cy="420" />
-          <circle class="account-dot batch-4" cx="410" cy="410" />
-          <circle class="account-dot batch-4" cx="290" cy="430" />
-          <circle class="account-dot batch-4" cx="450" cy="425" />
-        </g>
-        <g class="vail-marker">
-          <circle class="vail-pulse" cx="330" cy="355" r="5" />
-          <circle class="vail-core" cx="330" cy="355" />
-          <text class="vail-label" x="330" y="338">Vail</text>
-        </g>
-      </svg>
+      <div class="territory-map-frame">
+        <img class="territory-map-img" src="territory-map.png" alt="Topographic territory map of Montana, Wyoming, Utah, and Colorado with Vail, CO marked" />
+        <span class="territory-vail-pulse" aria-hidden="true"></span>
+      </div>
     </div>
 
     <div class="territory-stats-panel">
