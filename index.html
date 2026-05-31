@@ -213,6 +213,153 @@
   .prose-block p:last-child { margin-bottom: 0; }
   .prose-block p strong { color: var(--text); font-weight: 600; }
 
+  /* GROWTH CHARTS (Section 01) */
+  .growth-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 3.5rem 0 2.5rem;
+    max-width: 900px;
+  }
+  .growth-card {
+    position: relative;
+    padding: 1.75rem 1.5rem 1.5rem;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.4);
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.4s;
+  }
+  .growth-card:hover {
+    border-color: var(--red);
+    transform: translateY(-2px);
+  }
+  .growth-card-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+  .growth-chart {
+    width: 100%; height: 70px;
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--red);
+  }
+  .growth-chart path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    transition: stroke-dashoffset 1.8s cubic-bezier(.2,.6,.2,1) 0.2s;
+  }
+  .growth-chart .start-dot,
+  .growth-chart .end-dot {
+    fill: currentColor;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.4s;
+  }
+  .growth-chart .end-dot {
+    transition-delay: 1.8s;
+  }
+  .growth-chart .end-dot-pulse {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    opacity: 0;
+  }
+  .growth-card.visible .growth-chart path {
+    stroke-dashoffset: 0;
+  }
+  .growth-card.visible .growth-chart .start-dot,
+  .growth-card.visible .growth-chart .end-dot {
+    opacity: 1;
+  }
+  .growth-card.visible .growth-chart .end-dot-pulse {
+    animation: dotPulse 2s ease-out 2s infinite;
+  }
+  @keyframes dotPulse {
+    0%   { opacity: 0.55; r: 4; }
+    100% { opacity: 0;    r: 14; }
+  }
+  .growth-points {
+    display: flex; justify-content: space-between;
+    align-items: baseline; gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .growth-start {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .growth-end {
+    font-family: var(--serif);
+    font-size: 1.65rem;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .growth-delta {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--red);
+    padding: 0.35rem 0.7rem;
+    border: 1px solid rgba(196,30,58,0.25);
+    border-radius: 999px;
+    background: rgba(196,30,58,0.06);
+    margin-top: 0.25rem;
+  }
+  .growth-delta::before {
+    content: '';
+    display: inline-block;
+    width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 6px solid var(--red);
+  }
+
+  /* PRODUCT PILLARS */
+  .product-pillars {
+    display: flex; flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 2.5rem 0 0.5rem;
+    max-width: 740px;
+  }
+  .product-pillars-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 2.5rem 0 0.75rem;
+    max-width: 740px;
+  }
+  .product-pill {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    padding: 0.5rem 0.95rem;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.5);
+    border-radius: 999px;
+    transition: all 0.25s;
+    cursor: default;
+  }
+  .product-pill:hover {
+    border-color: var(--red);
+    color: var(--red);
+    background: rgba(196,30,58,0.04);
+    transform: translateY(-1px);
+  }
+
   /* DARK BAND */
   .dark-band {
     background: var(--black); color: var(--warm);
@@ -314,6 +461,7 @@
   @media (max-width: 900px) {
     .hero-stats { grid-template-columns: repeat(2, 1fr); }
     .ahead-grid { grid-template-columns: 1fr; }
+    .growth-grid { grid-template-columns: 1fr; gap: 1rem; }
     nav ul { display: none; }
   }
   @media (max-width: 600px) {
@@ -321,6 +469,7 @@
     section { padding: 4rem 1.25rem; }
     .dark-band { padding: 4rem 1.25rem; }
     .hero { padding: 6rem 1.25rem 3rem; }
+    .growth-end { font-size: 1.45rem; }
   }
 </style>
 </head>
@@ -401,6 +550,61 @@
     <p>Over five years, I helped take that business from break-even to $230K in annual net profit. Revenue grew from $2.5M to over $3M. The ski rental department grew from $250K to $425K. I hired the teams, built the performance systems, managed the vendor relationships, ran the marketing, and made the buying decisions &mdash; including Atomic.</p>
     <p>Atomic does not win at retail because a rep gets one big preseason order. It wins when the shop staff understands the boot wall, trusts the ski wall, knows how to tell the product story, and moves through inventory cleanly enough to reorder before the season is gone. I learned that from the inside.</p>
     <p>The foundation was not only product knowledge. It was the lived reality of standing behind the counter, owning the margin, and learning what actually makes a ski shop work.</p>
+  </div>
+
+  <div class="growth-grid">
+    <div class="growth-card reveal">
+      <div class="growth-card-label">Annual net profit</div>
+      <svg class="growth-chart" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 8 60 Q 70 58, 110 42 T 192 10" />
+        <circle class="start-dot" cx="8" cy="60" r="3" />
+        <circle class="end-dot-pulse" cx="192" cy="10" r="4" />
+        <circle class="end-dot" cx="192" cy="10" r="4" />
+      </svg>
+      <div class="growth-points">
+        <span class="growth-start">break-even</span>
+        <span class="growth-end" data-count="230" data-prefix="$" data-suffix="K">$230K</span>
+      </div>
+      <div class="growth-delta">5-year turnaround</div>
+    </div>
+
+    <div class="growth-card reveal">
+      <div class="growth-card-label">Shop revenue</div>
+      <svg class="growth-chart" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 8 42 Q 80 38, 120 28 T 192 14" />
+        <circle class="start-dot" cx="8" cy="42" r="3" />
+        <circle class="end-dot-pulse" cx="192" cy="14" r="4" />
+        <circle class="end-dot" cx="192" cy="14" r="4" />
+      </svg>
+      <div class="growth-points">
+        <span class="growth-start">$2.5M</span>
+        <span class="growth-end" data-count="3" data-prefix="$" data-suffix="M+">$3M+</span>
+      </div>
+      <div class="growth-delta">+20% revenue</div>
+    </div>
+
+    <div class="growth-card reveal">
+      <div class="growth-card-label">Ski rental dept.</div>
+      <svg class="growth-chart" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 8 55 Q 70 50, 110 36 T 192 8" />
+        <circle class="start-dot" cx="8" cy="55" r="3" />
+        <circle class="end-dot-pulse" cx="192" cy="8" r="4" />
+        <circle class="end-dot" cx="192" cy="8" r="4" />
+      </svg>
+      <div class="growth-points">
+        <span class="growth-start">$250K</span>
+        <span class="growth-end" data-count="425" data-prefix="$" data-suffix="K">$425K</span>
+      </div>
+      <div class="growth-delta">+70% growth</div>
+    </div>
+  </div>
+
+  <div class="product-pillars-label">Atomic line, from the shop floor</div>
+  <div class="product-pillars">
+    <span class="product-pill">Backland Touring</span>
+    <span class="product-pill">Bent Chetler</span>
+    <span class="product-pill">Hawx Ultra</span>
+    <span class="product-pill">Redster</span>
   </div>
 </section>
 
