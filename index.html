@@ -386,9 +386,9 @@
   /* TERRITORY PANEL (Section 02) */
   .territory-panel {
     display: grid;
-    grid-template-columns: 1.25fr 1fr;
-    gap: 2rem;
-    margin-top: 3.5rem;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 0;
     align-items: start;
   }
   .territory-map-wrap {
@@ -1347,14 +1347,16 @@
 <section id="territory" class="reveal">
   <div class="section-num">02 &mdash; Where I&rsquo;ve taken it</div>
   <h2>From one shop to a four-state territory</h2>
-  <div class="prose-block">
-    <p>After Steamboat, I moved into territory sales at Trek Bicycle. The product category changed. The operating model didn&rsquo;t.</p>
-    <p>I manage 60+ dealer and strategic accounts across Colorado, Utah, Wyoming, and Montana &mdash; a portfolio that generates over $40M annually. I was handed 36 accounts and a territory that included a failed market in Utah. Today, the territory has grown to 63+ accounts, the Utah market has been rebuilt into a productive region, and I&rsquo;ve been ranked top 1&ndash;5% nationally in both revenue and dealer satisfaction every year.</p>
-    <p>The work I&rsquo;m most proud of is what happens inside the accounts. I manage Vail Resorts as a national strategic account across their retail locations and rental operations. I grew that relationship by $1.5M over two years &mdash; not by undercutting competitors, but by being useful. Helping their teams sell better. Building assortment strategies that matched their customer base. Showing up with data and a plan, not just a line sheet.</p>
-    <p>That&rsquo;s the same approach I take with every account, from a four-location Scheels to a single-owner shop in Bozeman. Help the dealer succeed and the brand grows with them.</p>
-  </div>
+  <div class="section-cols">
+    <div class="prose-block">
+      <p>After Steamboat, I moved into territory sales at Trek Bicycle. The product category changed. The operating model didn&rsquo;t.</p>
+      <p>I manage 60+ dealer and strategic accounts across Colorado, Utah, Wyoming, and Montana &mdash; a portfolio that generates over $40M annually. I was handed 36 accounts and a territory that included a failed market in Utah. Today, the territory has grown to 63+ accounts, the Utah market has been rebuilt into a productive region, and I&rsquo;ve been ranked top 1&ndash;5% nationally in both revenue and dealer satisfaction every year.</p>
+      <p>The work I&rsquo;m most proud of is what happens inside the accounts. I manage Vail Resorts as a national strategic account across their retail locations and rental operations. I grew that relationship by $1.5M over two years &mdash; not by undercutting competitors, but by being useful. Helping their teams sell better. Building assortment strategies that matched their customer base. Showing up with data and a plan, not just a line sheet.</p>
+      <p>That&rsquo;s the same approach I take with every account, from a four-location Scheels to a single-owner shop in Bozeman. Help the dealer succeed and the brand grows with them.</p>
+    </div>
 
-  <div class="territory-panel reveal">
+    <div class="section-visual-col">
+      <div class="territory-panel reveal">
     <div class="territory-map-wrap">
       <div class="territory-map-label">Territory <span>&mdash;</span> CO &middot; UT &middot; WY &middot; MT</div>
       <svg class="territory-map" viewBox="0 0 600 460" aria-hidden="true">
@@ -1460,6 +1462,8 @@
           <span class="vail-arrow-up">&uarr;</span><span data-count="1.5" data-prefix="$" data-suffix="M">$1.5M</span>
         </div>
         <div class="vail-callout-meta">Account growth over 2 years</div>
+      </div>
+    </div>
       </div>
     </div>
   </div>
