@@ -572,6 +572,242 @@
     opacity: 0.65;
   }
 
+  /* SYSTEMS DASHBOARD (Section 03) */
+  .dashboard-mockup {
+    margin: 3.5rem 0 1rem;
+    background: #0F0F11;
+    color: #F5F2ED;
+    border: 1px solid #2A2A2D;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -30px rgba(13,13,13,0.45);
+  }
+  .dashboard-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.85rem 1.25rem;
+    background: #16161A;
+    border-bottom: 1px solid #2A2A2D;
+  }
+  .dashboard-window-dots {
+    display: flex; gap: 0.4rem; flex-shrink: 0;
+  }
+  .dashboard-window-dots span {
+    display: block;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+  .dashboard-title {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: rgba(245,242,237,0.85);
+  }
+  .dashboard-title-sub {
+    color: rgba(245,242,237,0.42);
+    margin-left: 0.5em;
+  }
+  .ai-pill {
+    margin-left: auto;
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid rgba(196,30,58,0.45);
+    background: rgba(196,30,58,0.12);
+    color: var(--warm);
+    border-radius: 999px;
+    position: relative;
+  }
+  .ai-pill::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(196,30,58,0.35), transparent 70%);
+    z-index: -1;
+    animation: aiGlow 2.8s ease-in-out infinite;
+  }
+  @keyframes aiGlow {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 0.8; }
+  }
+  .ai-spark {
+    width: 11px; height: 11px;
+    fill: var(--red);
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: #24242A;
+  }
+  .dash-card {
+    padding: 1.25rem 1.35rem 1.4rem;
+    background: #0F0F11;
+    min-height: 170px;
+    display: flex; flex-direction: column;
+  }
+  .dash-card-title {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.42);
+    margin-bottom: 1rem;
+  }
+
+  /* Tier bars */
+  .tier-row {
+    display: flex; flex-direction: column; gap: 0.5rem; flex: 1;
+  }
+  .tier-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--mono); font-size: 0.75rem;
+    color: rgba(245,242,237,0.85);
+    position: relative;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+  .tier-bar::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 0;
+    transition: width 1.6s cubic-bezier(.2,.6,.2,1) 0.3s;
+  }
+  .tier-bar > * { position: relative; z-index: 1; }
+  .tier-bar b { font-weight: 600; color: var(--warm); }
+  .tier-bar.tier-a::before { background: rgba(196,30,58,0.32); }
+  .tier-bar.tier-b::before { background: rgba(196,30,58,0.18); }
+  .tier-bar.tier-c::before { background: rgba(196,30,58,0.08); }
+  .dashboard-mockup.visible .tier-bar { transition: none; }
+  .dashboard-mockup.visible .tier-bar.tier-a::before { width: 92%; }
+  .dashboard-mockup.visible .tier-bar.tier-b::before { width: 66%; transition-delay: 0.45s; }
+  .dashboard-mockup.visible .tier-bar.tier-c::before { width: 40%; transition-delay: 0.6s; }
+
+  /* Sparkline */
+  .sparkline { width: 100%; height: 56px; display: block; }
+  .sparkline-actual {
+    fill: none; stroke: var(--red);
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 500; stroke-dashoffset: 500;
+    transition: stroke-dashoffset 1.8s cubic-bezier(.2,.6,.2,1) 0.4s;
+  }
+  .sparkline-quota {
+    fill: none; stroke: rgba(245,242,237,0.22);
+    stroke-width: 1; stroke-dasharray: 3 4;
+    opacity: 0;
+    transition: opacity 0.6s ease 0.2s;
+  }
+  .sparkline-fill {
+    fill: var(--red); opacity: 0;
+    transition: opacity 0.8s ease 1.8s;
+  }
+  .dashboard-mockup.visible .sparkline-actual { stroke-dashoffset: 0; }
+  .dashboard-mockup.visible .sparkline-quota { opacity: 1; }
+  .dashboard-mockup.visible .sparkline-fill { opacity: 0.12; }
+
+  .sparkline-stats {
+    display: flex; align-items: baseline; gap: 0.6rem;
+    margin-top: 0.6rem;
+  }
+  .sparkline-num {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    color: var(--warm);
+    line-height: 1;
+  }
+  .sparkline-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: rgba(245,242,237,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Travel route */
+  .travel-route { width: 100%; height: 78px; display: block; }
+  .route-line {
+    fill: none; stroke: var(--red);
+    stroke-width: 1.3; stroke-linecap: round;
+    stroke-dasharray: 600; stroke-dashoffset: 600;
+    transition: stroke-dashoffset 2.2s cubic-bezier(.2,.6,.2,1) 0.6s;
+    opacity: 0.85;
+  }
+  .dashboard-mockup.visible .route-line { stroke-dashoffset: 0; }
+  .route-stop {
+    fill: var(--warm); opacity: 0;
+    r: 0;
+    transition: opacity 0.3s ease, r 0.4s cubic-bezier(.5,1.6,.5,1);
+  }
+  .route-stop-anchor { fill: var(--red); }
+  .dashboard-mockup.visible .route-stop { opacity: 1; r: 3; transition-delay: 0.9s; }
+  .dashboard-mockup.visible .route-stop.r2 { transition-delay: 1.1s; }
+  .dashboard-mockup.visible .route-stop.r3 { transition-delay: 1.3s; }
+  .dashboard-mockup.visible .route-stop.r4 { transition-delay: 1.5s; }
+  .dashboard-mockup.visible .route-stop.r5 { transition-delay: 1.7s; }
+  .dashboard-mockup.visible .route-stop.r6 { transition-delay: 1.9s; }
+  .travel-meta {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: rgba(245,242,237,0.55);
+    margin-top: 0.5rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* Action queue */
+  .action-list {
+    list-style: none;
+    display: flex; flex-direction: column;
+    flex: 1;
+  }
+  .action-list li {
+    display: flex; align-items: center; gap: 0.7rem;
+    font-size: 0.78rem;
+    color: rgba(245,242,237,0.82);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .action-list li:last-child { border-bottom: none; }
+  .dashboard-mockup.visible .action-list li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.6s; }
+  .dashboard-mockup.visible .action-list li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.8s; }
+  .dashboard-mockup.visible .action-list li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 1.0s; }
+  .action-dot {
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .action-meta {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: rgba(245,242,237,0.4);
+    letter-spacing: 0.05em;
+  }
+
+  /* Dashboard footer band */
+  .dashboard-footer {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.9rem; flex-wrap: wrap;
+    padding: 0.9rem 1.25rem;
+    background: #16161A;
+    border-top: 1px solid #2A2A2D;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: rgba(245,242,237,0.6);
+  }
+  .dashboard-footer-stat { color: var(--warm); }
+  .dashboard-footer-divider { color: rgba(245,242,237,0.25); }
+
   /* DARK BAND */
   .dark-band {
     background: var(--black); color: var(--warm);
@@ -675,6 +911,7 @@
     .ahead-grid { grid-template-columns: 1fr; }
     .growth-grid { grid-template-columns: 1fr; gap: 1rem; }
     .territory-panel { grid-template-columns: 1fr; gap: 1.25rem; }
+    .dashboard-grid { grid-template-columns: 1fr; }
     nav ul { display: none; }
   }
   @media (max-width: 600px) {
@@ -957,6 +1194,79 @@
     <p>In a seasonal business, forecasting is not administrative work. It is how you protect production planning, dealer trust, margin, and inventory health. Getting that wrong doesn&rsquo;t just cost a quarter &mdash; it can cost a full season.</p>
     <p>I also run structured coaching sessions with dealers on floor selling, inventory turns, and product knowledge. The preseason order is only the beginning. The real test is whether the dealer can move through product, protect margin, reorder intelligently, and finish the season wanting more from the brand. That&rsquo;s where coaching, assortment planning, and follow-up discipline make the difference.</p>
     <p>Trek selected me for their AI Champions program &mdash; I&rsquo;ve built tools that help territory managers work more efficiently in the field, from account prioritization to travel planning to follow-up cadence. I&rsquo;m drawn to the operational side of this work because that&rsquo;s where the leverage is. One good system serves every account in the territory.</p>
+  </div>
+
+  <div class="dashboard-mockup reveal">
+    <div class="dashboard-header">
+      <div class="dashboard-window-dots"><span></span><span></span><span></span></div>
+      <div class="dashboard-title">Territory Console<span class="dashboard-title-sub">// CO &middot; UT &middot; WY &middot; MT</span></div>
+      <div class="ai-pill">
+        <svg class="ai-spark" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2 L13.5 9 L20.5 10.5 L13.5 12 L12 19 L10.5 12 L3.5 10.5 L10.5 9 Z" />
+        </svg>
+        <span>AI Champion</span>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Account tiering -->
+      <div class="dash-card">
+        <div class="dash-card-title">Account tiering &middot; Q4</div>
+        <div class="tier-row">
+          <div class="tier-bar tier-a"><span>Tier A &middot; Brand builders</span><b>12</b></div>
+          <div class="tier-bar tier-b"><span>Tier B &middot; Growth</span><b>28</b></div>
+          <div class="tier-bar tier-c"><span>Tier C &middot; Maintain</span><b>23</b></div>
+        </div>
+      </div>
+
+      <!-- Forecast sparkline -->
+      <div class="dash-card">
+        <div class="dash-card-title">Forecast vs. quota</div>
+        <svg class="sparkline" viewBox="0 0 200 56" preserveAspectRatio="none" aria-hidden="true">
+          <path class="sparkline-quota" d="M 0 30 L 200 30" />
+          <path class="sparkline-fill" d="M 5 42 L 25 38 L 50 40 L 75 33 L 100 28 L 125 22 L 150 18 L 175 12 L 195 8 L 195 56 L 5 56 Z" />
+          <path class="sparkline-actual" d="M 5 42 L 25 38 L 50 40 L 75 33 L 100 28 L 125 22 L 150 18 L 175 12 L 195 8" />
+        </svg>
+        <div class="sparkline-stats">
+          <span class="sparkline-num">108%</span>
+          <span class="sparkline-label">Q3 attainment</span>
+        </div>
+      </div>
+
+      <!-- Travel route -->
+      <div class="dash-card">
+        <div class="dash-card-title">This week's route</div>
+        <svg class="travel-route" viewBox="0 0 200 78" preserveAspectRatio="none" aria-hidden="true">
+          <path class="route-line" d="M 15 52 Q 30 30 50 38 Q 70 46 85 30 Q 100 16 120 32 Q 140 48 155 38 Q 170 28 185 22" />
+          <circle class="route-stop route-stop-anchor" cx="15" cy="52" />
+          <circle class="route-stop r2" cx="50" cy="38" />
+          <circle class="route-stop r3" cx="85" cy="30" />
+          <circle class="route-stop r4" cx="120" cy="32" />
+          <circle class="route-stop r5" cx="155" cy="38" />
+          <circle class="route-stop r6 route-stop-anchor" cx="185" cy="22" />
+        </svg>
+        <div class="travel-meta">7 stops &middot; 480 mi &middot; CO + WY loop</div>
+      </div>
+
+      <!-- Action queue -->
+      <div class="dash-card">
+        <div class="dash-card-title">Follow-up queue</div>
+        <ul class="action-list">
+          <li><span class="action-dot"></span>Park City &mdash; preseason review<span class="action-meta">Today</span></li>
+          <li><span class="action-dot"></span>Bozeman &mdash; assortment plan<span class="action-meta">Wed</span></li>
+          <li><span class="action-dot"></span>Scheels SLC &mdash; reorder check<span class="action-meta">Fri</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dashboard-footer">
+      <span>Powering field decisions across</span>
+      <span class="dashboard-footer-stat">63+ accounts</span>
+      <span class="dashboard-footer-divider">&middot;</span>
+      <span class="dashboard-footer-stat">4 states</span>
+      <span class="dashboard-footer-divider">&middot;</span>
+      <span class="dashboard-footer-stat">$40M+ revenue</span>
+    </div>
   </div>
 </section>
 
