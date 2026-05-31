@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foster Martin — Atomic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C41E3A;
+    --red-dark: #A01830;
+    --black: #0D0D0D;
+    --dark: #1A1A1A;
+    --warm: #F5F2ED;
+    --cream: #EDE8E0;
+    --text: #2D2D2D;
+    --text-light: #6B6560;
+    --text-muted: #9B958E;
+    --border: rgba(26,26,26,0.1);
+    --border-light: rgba(245,242,237,0.12);
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: var(--sans);
+    background: var(--warm);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--red); color: white; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(245,242,237,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-brand {
+    font-family: var(--sans); font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--dark);
+  }
+  .nav-brand span { color: var(--red); margin: 0 0.4em; }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav a {
+    text-decoration: none; color: var(--text-light);
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--red); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; padding: 8rem 2rem 4rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .hero-label {
+    font-family: var(--mono); font-size: 0.75rem;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--red); margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.05; font-weight: 400;
+    color: var(--dark); max-width: 900px; margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--red); }
+  .hero-sub {
+    font-size: 1.15rem; color: var(--text-light);
+    max-width: 660px; line-height: 1.7; margin-bottom: 3.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); max-width: 820px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+  .hero-stat { background: var(--warm); padding: 1.5rem 1.25rem; }
+  .hero-stat .num {
+    font-family: var(--serif); font-size: 1.8rem;
+    color: var(--dark); line-height: 1.1; margin-bottom: 0.3rem;
+  }
+  .hero-stat .label {
+    font-size: 0.72rem; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.4;
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-num {
+    font-family: var(--mono); font-size: 0.7rem;
+    color: var(--red); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  section h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400; color: var(--dark);
+    line-height: 1.15; margin-bottom: 2rem; max-width: 700px;
+  }
+  .section-divider {
+    width: 100%; height: 1px; background: var(--border);
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  /* PROSE */
+  .prose-block { margin-top: 1.5rem; max-width: 740px; }
+  .prose-block p {
+    font-size: 1.05rem; color: var(--text-light);
+    line-height: 1.78; margin-bottom: 1.25rem;
+  }
+  .prose-block p:last-child { margin-bottom: 0; }
+  .prose-block p strong { color: var(--text); font-weight: 600; }
+
+  /* DARK BAND */
+  .dark-band {
+    background: var(--black); color: var(--warm);
+    padding: 6rem 2rem; max-width: none;
+  }
+  .dark-band .band-inner { max-width: 1200px; margin: 0 auto; }
+  .dark-band h2 { color: var(--warm); }
+  .dark-band .section-num { color: var(--red); }
+  .dark-band .prose-block p { color: rgba(245,242,237,0.7); }
+  .dark-band .prose-block p strong { color: var(--warm); }
+
+  /* AHEAD CARDS */
+  .ahead-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem; margin-top: 3rem;
+  }
+  .ahead-card {
+    padding: 2rem; border: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .ahead-card:hover { border-color: var(--red); }
+  .ahead-card h3 {
+    font-family: var(--serif); font-size: 1.25rem;
+    color: var(--dark); margin-bottom: 0.75rem; line-height: 1.25;
+  }
+  .ahead-card p {
+    font-size: 0.95rem; color: var(--text-light); line-height: 1.7;
+  }
+
+  /* CTA */
+  .cta-section {
+    text-align: center; padding: 8rem 2rem;
+    max-width: 700px; margin: 0 auto;
+  }
+  .cta-section h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0 auto 1.5rem; max-width: none;
+  }
+  .cta-section p {
+    color: var(--text-light); font-size: 1.05rem;
+    margin-bottom: 2.5rem; line-height: 1.7;
+  }
+  .cta-links {
+    display: flex; gap: 1rem;
+    justify-content: center; flex-wrap: wrap;
+  }
+  .cta-links a {
+    display: inline-block; padding: 0.85rem 2rem;
+    font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .btn-primary {
+    background: var(--red); color: white;
+    border: 2px solid var(--red);
+  }
+  .btn-primary:hover { background: var(--red-dark); border-color: var(--red-dark); }
+  .btn-secondary {
+    background: transparent; color: var(--dark);
+    border: 2px solid var(--dark);
+  }
+  .btn-secondary:hover { background: var(--dark); color: var(--warm); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem; text-align: center;
+    font-size: 0.75rem; color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .ahead-grid { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+  }
+  @media (max-width: 600px) {
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    section { padding: 4rem 1.25rem; }
+    .dark-band { padding: 4rem 1.25rem; }
+    .hero { padding: 6rem 1.25rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">Foster Martin <span>&times;</span> Atomic</div>
+    <ul>
+      <li><a href="#origin">Origin</a></li>
+      <li><a href="#territory">Territory</a></li>
+      <li><a href="#systems">Systems</a></li>
+      <li><a href="#brand">Brand</a></li>
+      <li><a href="#ahead">Looking Ahead</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">Application &mdash; National Sales Manager, U.S.</div>
+  <h1>Born on skis. <em>Built from the shop&nbsp;floor.</em></h1>
+  <p class="hero-sub">
+    I was born in Jackson Hole, raised in Steamboat, and put on skis almost as soon as I could walk. I later ran a dual-season ski and bike shop in Steamboat for five years, including buying, selling, renting, tuning, and fitting Atomic product from the shop floor. Today I manage a $40M+ territory across Colorado, Utah, Wyoming, and Montana for Trek. This is the case for why that path matters for Atomic.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">$40M+</div>
+      <div class="label">Current territory revenue</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">60+</div>
+      <div class="label">Dealer & strategic accounts</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">5 yrs</div>
+      <div class="label">Ski retail P&L, buying, rental, service</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">JH / Steamboat</div>
+      <div class="label">Born into ski country</div>
+    </div>
+  </div>
+</header>
+
+<div class="section-divider"></div>
+
+<!-- 01 -->
+<section id="origin" class="reveal">
+  <div class="section-num">01 &mdash; Where I come from</div>
+  <h2>The shop floor in Steamboat</h2>
+  <div class="prose-block">
+    <p>I didn&rsquo;t come to the ski industry through a job posting. I grew up in it. Steamboat Springs was home for most of my life, and for five of those years I ran Steamboat Ski &amp; Bike Kare &mdash; a dual-season retail, rental, and service operation and high-volume Atomic dealer.</p>
+    <p>That meant making the preseason buying calls on Backland touring boots and Bent Chetlers for the demo fleet. It meant watching Hawx Ultras get punched out in the boot room at 7am before first chair and knowing which sizes to reorder by December. It meant tuning race skis for kids coming up through the Steamboat Springs Winter Sports Club &mdash; including future Olympian and Atomic Redster athlete Jett Seymour. It meant managing the rental fleet &mdash; figuring out the economics of utilization rates, damage, and turnover across a compressed winter season where every week of snow changes the math.</p>
+    <p>Over five years, I helped take that business from break-even to $230K in annual net profit. Revenue grew from $2.5M to over $3M. The ski rental department grew from $250K to $425K. I hired the teams, built the performance systems, managed the vendor relationships, ran the marketing, and made the buying decisions &mdash; including Atomic.</p>
+    <p>Atomic does not win at retail because a rep gets one big preseason order. It wins when the shop staff understands the boot wall, trusts the ski wall, knows how to tell the product story, and moves through inventory cleanly enough to reorder before the season is gone. I learned that from the inside.</p>
+    <p>The foundation was not only product knowledge. It was the lived reality of standing behind the counter, owning the margin, and learning what actually makes a ski shop work.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- 02 -->
+<section id="territory" class="reveal">
+  <div class="section-num">02 &mdash; Where I&rsquo;ve taken it</div>
+  <h2>From one shop to a four-state territory</h2>
+  <div class="prose-block">
+    <p>After Steamboat, I moved into territory sales at Trek Bicycle. The product category changed. The operating model didn&rsquo;t.</p>
+    <p>I manage 60+ dealer and strategic accounts across Colorado, Utah, Wyoming, and Montana &mdash; a portfolio that generates over $40M annually. I was handed 36 accounts and a territory that included a failed market in Utah. Today, the territory has grown to 63+ accounts, the Utah market has been rebuilt into a productive region, and I&rsquo;ve been ranked top 1&ndash;5% nationally in both revenue and dealer satisfaction every year.</p>
+    <p>The work I&rsquo;m most proud of is what happens inside the accounts. I manage Vail Resorts as a national strategic account across their retail locations and rental operations. I grew that relationship by $1.5M over two years &mdash; not by undercutting competitors, but by being useful. Helping their teams sell better. Building assortment strategies that matched their customer base. Showing up with data and a plan, not just a line sheet.</p>
+    <p>That&rsquo;s the same approach I take with every account, from a four-location Scheels to a single-owner shop in Bozeman. Help the dealer succeed and the brand grows with them.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- 03 -->
+<section id="systems" class="reveal">
+  <div class="section-num">03 &mdash; How I work</div>
+  <h2>The systems behind the territory</h2>
+  <div class="prose-block">
+    <p>Specialty retail runs on relationships. But relationships without structure don&rsquo;t scale.</p>
+    <p>When I started at Trek, I needed a way to plan travel efficiently, prioritize which accounts needed attention, and see the health of 60+ dealer relationships at a glance across four states. So I built those tools &mdash; account tiering by revenue potential and growth trajectory, seasonal forecasting tied to order cycles and quota gaps, and a segmentation framework that tells me where my time creates the most value on any given week.</p>
+    <p>In a seasonal business, forecasting is not administrative work. It is how you protect production planning, dealer trust, margin, and inventory health. Getting that wrong doesn&rsquo;t just cost a quarter &mdash; it can cost a full season.</p>
+    <p>I also run structured coaching sessions with dealers on floor selling, inventory turns, and product knowledge. The preseason order is only the beginning. The real test is whether the dealer can move through product, protect margin, reorder intelligently, and finish the season wanting more from the brand. That&rsquo;s where coaching, assortment planning, and follow-up discipline make the difference.</p>
+    <p>Trek selected me for their AI Champions program &mdash; I&rsquo;ve built tools that help territory managers work more efficiently in the field, from account prioritization to travel planning to follow-up cadence. I&rsquo;m drawn to the operational side of this work because that&rsquo;s where the leverage is. One good system serves every account in the territory.</p>
+  </div>
+</section>
+
+<!-- 04 DARK -->
+<div class="dark-band" id="brand">
+  <div class="band-inner reveal">
+    <div class="section-num">04 &mdash; The brand</div>
+    <h2>Atomic</h2>
+    <div class="prose-block">
+      <p>Atomic has one of the rarest positions in winter sports: deep race credibility, true freeride relevance, a technical boot story, and enough product breadth to matter across the whole specialty shop.</p>
+      <p>That combination creates opportunity, but it also raises the standard for sales leadership. Redster, Hawx, Bent, Maverick/Maven, Backland, helmets, protection, and apparel don&rsquo;t all sell through the same customer, the same shop staff, or the same account strategy. The brand has to stay premium while still being commercially useful to dealers.</p>
+      <p>That is the part that interests me most. Atomic is not just a ski wall. It is a full winter sports platform with race heritage, freeride energy, all-mountain credibility, touring relevance, and expanding category reach. The job is not simply to grow distribution. It is to grow the right distribution, protect the brand, improve sell-through, and make sure dealers understand where each part of the line belongs.</p>
+      <p>The commercial moment is interesting because Atomic has the credibility to grow across a broader winter sports portfolio &mdash; but that growth has to be disciplined.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 05 -->
+<section id="ahead" class="reveal">
+  <div class="section-num">05 &mdash; Looking ahead</div>
+  <h2>What I&rsquo;d bring to the conversation</h2>
+  <div class="prose-block" style="margin-bottom: 1rem;">
+    <p>I would not come in assuming the answer before listening to the team. But from the outside, this role appears to sit at the intersection of four priorities: distribution quality, forecast discipline, rep alignment, and dealer sell-through. Those are areas where my background is directly relevant.</p>
+  </div>
+  <div class="ahead-grid">
+    <div class="ahead-card">
+      <h3>Understanding the account base</h3>
+      <p>The first priority is understanding where Atomic is strongest, where it is underrepresented, which dealers are true brand builders, and how to balance volume with premium distribution quality. Growth matters, but in a premium category, the quality of distribution matters just as much. I&rsquo;d want to spend my first weeks listening &mdash; meeting the reps, learning the relationships, and understanding the landscape before forming opinions.</p>
+    </div>
+    <div class="ahead-card">
+      <h3>Creating alignment across the rep force</h3>
+      <p>A national sales role cannot depend on one person being good in the field. It requires clear priorities for reps: which accounts matter most, how the line should be positioned across different shop profiles, what the forecast needs to reflect, and how field intelligence gets back to leadership before it becomes stale. At Trek, I built the systems to manage this across 60+ accounts and four states. The principle scales &mdash; the tools just need to match the organization.</p>
+    </div>
+    <div class="ahead-card">
+      <h3>Improving sell-through, not just sell-in</h3>
+      <p>A preseason order is only healthy if the dealer can move through it. That means staff education on the boot wall, assortment planning that matches the shop&rsquo;s customer base, rental and demo strategy that creates product trial, and reorder discipline that keeps the right sizes and models in stock through the season. This is the work I&rsquo;ve done for five years at retail and two years at the brand level. It&rsquo;s where I&rsquo;m most effective.</p>
+    </div>
+    <div class="ahead-card">
+      <h3>Balancing growth with premium positioning</h3>
+      <p>Atomic has the credibility to grow, but the wrong growth can dilute the brand. The instinct should be to build from the right accounts outward &mdash; epicenter markets, specialty retailers who can tell the product story, and dealers who can represent the full winter sports portfolio with quality. I&rsquo;ve seen firsthand what happens when distribution gets ahead of sell-through capability, and I&rsquo;ve also seen what&rsquo;s possible when you invest in the accounts that are genuinely aligned with the brand.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CTA -->
+<div class="cta-section reveal">
+  <h2>Let&rsquo;s talk.</h2>
+  <p>Born in Jackson Hole. Raised in Steamboat. Former Atomic dealer. Currently managing a $40M+ multi-state territory for Trek.</p>
+  <div class="cta-links">
+    <a href="mailto:fostermartin67@gmail.com" class="btn-primary">Get in Touch</a>
+    <a href="#" class="btn-secondary">View Resume</a>
+    <a href="https://linkedin.com/in/foster-martin-22513b114" class="btn-secondary">LinkedIn</a>
+  </div>
+</div>
+
+<footer>Foster Martin &mdash; Golden, CO &nbsp;&middot;&nbsp; 2026</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
