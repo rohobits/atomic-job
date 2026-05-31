@@ -204,6 +204,29 @@
     max-width: 1200px; margin: 0 auto;
   }
 
+  /* SECTION 2-COL */
+  .section-cols {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3.5rem;
+    align-items: start;
+    margin-top: 1.5rem;
+  }
+  .section-cols .prose-block {
+    max-width: 100%;
+    margin-top: 0;
+  }
+  .section-visual-col {
+    position: relative;
+  }
+  .section-cols .product-pillars,
+  .section-cols .product-pillars-label {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .section-cols .product-pillars-label { margin-top: 2rem; }
+
   /* PROSE */
   .prose-block { margin-top: 1.5rem; max-width: 740px; }
   .prose-block p {
@@ -216,10 +239,10 @@
   /* GROWTH CHARTS (Section 01) */
   .growth-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin: 3.5rem 0 2.5rem;
-    max-width: 900px;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 0;
+    max-width: 100%;
   }
   .growth-card {
     position: relative;
@@ -1250,67 +1273,71 @@
 <section id="origin" class="reveal">
   <div class="section-num">01 &mdash; Where I come from</div>
   <h2>The shop floor in Steamboat</h2>
-  <div class="prose-block">
-    <p>I didn&rsquo;t come to the ski industry through a job posting. I grew up in it. Steamboat Springs was home for most of my life, and for five of those years I ran Steamboat Ski &amp; Bike Kare &mdash; a dual-season retail, rental, and service operation and high-volume Atomic dealer.</p>
-    <p>That meant making the preseason buying calls on Backland touring boots and Bent Chetlers for the demo fleet. It meant watching Hawx Ultras get punched out in the boot room at 7am before first chair and knowing which sizes to reorder by December. It meant tuning race skis for kids coming up through the Steamboat Springs Winter Sports Club &mdash; including future Olympian and Atomic Redster athlete Jett Seymour. It meant managing the rental fleet &mdash; figuring out the economics of utilization rates, damage, and turnover across a compressed winter season where every week of snow changes the math.</p>
-    <p>Over five years, I helped take that business from break-even to $230K in annual net profit. Revenue grew from $2.5M to over $3M. The ski rental department grew from $250K to $425K. I hired the teams, built the performance systems, managed the vendor relationships, ran the marketing, and made the buying decisions &mdash; including Atomic.</p>
-    <p>Atomic does not win at retail because a rep gets one big preseason order. It wins when the shop staff understands the boot wall, trusts the ski wall, knows how to tell the product story, and moves through inventory cleanly enough to reorder before the season is gone. I learned that from the inside.</p>
-    <p>The foundation was not only product knowledge. It was the lived reality of standing behind the counter, owning the margin, and learning what actually makes a ski shop work.</p>
-  </div>
-
-  <div class="growth-grid">
-    <div class="growth-card reveal">
-      <div class="growth-card-label">Annual net profit</div>
-      <svg class="growth-chart" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M 8 60 Q 70 58, 110 42 T 192 10" />
-        <circle class="start-dot" cx="8" cy="60" r="3" />
-        <circle class="end-dot-pulse" cx="192" cy="10" r="4" />
-        <circle class="end-dot" cx="192" cy="10" r="4" />
-      </svg>
-      <div class="growth-points">
-        <span class="growth-start">break-even</span>
-        <span class="growth-end" data-count="230" data-prefix="$" data-suffix="K">$230K</span>
-      </div>
-      <div class="growth-delta">5-year turnaround</div>
+  <div class="section-cols">
+    <div class="prose-block">
+      <p>I didn&rsquo;t come to the ski industry through a job posting. I grew up in it. Steamboat Springs was home for most of my life, and for five of those years I ran Steamboat Ski &amp; Bike Kare &mdash; a dual-season retail, rental, and service operation and high-volume Atomic dealer.</p>
+      <p>That meant making the preseason buying calls on Backland touring boots and Bent Chetlers for the demo fleet. It meant watching Hawx Ultras get punched out in the boot room at 7am before first chair and knowing which sizes to reorder by December. It meant tuning race skis for kids coming up through the Steamboat Springs Winter Sports Club &mdash; including future Olympian and Atomic Redster athlete Jett Seymour. It meant managing the rental fleet &mdash; figuring out the economics of utilization rates, damage, and turnover across a compressed winter season where every week of snow changes the math.</p>
+      <p>Over five years, I helped take that business from break-even to $230K in annual net profit. Revenue grew from $2.5M to over $3M. The ski rental department grew from $250K to $425K. I hired the teams, built the performance systems, managed the vendor relationships, ran the marketing, and made the buying decisions &mdash; including Atomic.</p>
+      <p>Atomic does not win at retail because a rep gets one big preseason order. It wins when the shop staff understands the boot wall, trusts the ski wall, knows how to tell the product story, and moves through inventory cleanly enough to reorder before the season is gone. I learned that from the inside.</p>
+      <p>The foundation was not only product knowledge. It was the lived reality of standing behind the counter, owning the margin, and learning what actually makes a ski shop work.</p>
     </div>
 
-    <div class="growth-card reveal">
-      <div class="growth-card-label">Shop revenue</div>
-      <svg class="growth-chart" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M 8 42 Q 80 38, 120 28 T 192 14" />
-        <circle class="start-dot" cx="8" cy="42" r="3" />
-        <circle class="end-dot-pulse" cx="192" cy="14" r="4" />
-        <circle class="end-dot" cx="192" cy="14" r="4" />
-      </svg>
-      <div class="growth-points">
-        <span class="growth-start">$2.5M</span>
-        <span class="growth-end" data-count="3" data-prefix="$" data-suffix="M+">$3M+</span>
-      </div>
-      <div class="growth-delta">+20% revenue</div>
-    </div>
+    <div class="section-visual-col">
+      <div class="growth-grid">
+        <div class="growth-card reveal">
+          <div class="growth-card-label">Annual net profit</div>
+          <svg class="growth-chart" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 8 60 Q 70 58, 110 42 T 192 10" />
+            <circle class="start-dot" cx="8" cy="60" r="3" />
+            <circle class="end-dot-pulse" cx="192" cy="10" r="4" />
+            <circle class="end-dot" cx="192" cy="10" r="4" />
+          </svg>
+          <div class="growth-points">
+            <span class="growth-start">break-even</span>
+            <span class="growth-end" data-count="230" data-prefix="$" data-suffix="K">$230K</span>
+          </div>
+          <div class="growth-delta">5-year turnaround</div>
+        </div>
 
-    <div class="growth-card reveal">
-      <div class="growth-card-label">Ski rental dept.</div>
-      <svg class="growth-chart" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M 8 55 Q 70 50, 110 36 T 192 8" />
-        <circle class="start-dot" cx="8" cy="55" r="3" />
-        <circle class="end-dot-pulse" cx="192" cy="8" r="4" />
-        <circle class="end-dot" cx="192" cy="8" r="4" />
-      </svg>
-      <div class="growth-points">
-        <span class="growth-start">$250K</span>
-        <span class="growth-end" data-count="425" data-prefix="$" data-suffix="K">$425K</span>
-      </div>
-      <div class="growth-delta">+70% growth</div>
-    </div>
-  </div>
+        <div class="growth-card reveal">
+          <div class="growth-card-label">Shop revenue</div>
+          <svg class="growth-chart" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 8 42 Q 80 38, 120 28 T 192 14" />
+            <circle class="start-dot" cx="8" cy="42" r="3" />
+            <circle class="end-dot-pulse" cx="192" cy="14" r="4" />
+            <circle class="end-dot" cx="192" cy="14" r="4" />
+          </svg>
+          <div class="growth-points">
+            <span class="growth-start">$2.5M</span>
+            <span class="growth-end" data-count="3" data-prefix="$" data-suffix="M+">$3M+</span>
+          </div>
+          <div class="growth-delta">+20% revenue</div>
+        </div>
 
-  <div class="product-pillars-label">Atomic line, from the shop floor</div>
-  <div class="product-pillars">
-    <span class="product-pill">Backland Touring</span>
-    <span class="product-pill">Bent Chetler</span>
-    <span class="product-pill">Hawx Ultra</span>
-    <span class="product-pill">Redster</span>
+        <div class="growth-card reveal">
+          <div class="growth-card-label">Ski rental dept.</div>
+          <svg class="growth-chart" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 8 55 Q 70 50, 110 36 T 192 8" />
+            <circle class="start-dot" cx="8" cy="55" r="3" />
+            <circle class="end-dot-pulse" cx="192" cy="8" r="4" />
+            <circle class="end-dot" cx="192" cy="8" r="4" />
+          </svg>
+          <div class="growth-points">
+            <span class="growth-start">$250K</span>
+            <span class="growth-end" data-count="425" data-prefix="$" data-suffix="K">$425K</span>
+          </div>
+          <div class="growth-delta">+70% growth</div>
+        </div>
+      </div>
+
+      <div class="product-pillars-label">Atomic line, from the shop floor</div>
+      <div class="product-pillars">
+        <span class="product-pill">Backland Touring</span>
+        <span class="product-pill">Bent Chetler</span>
+        <span class="product-pill">Hawx Ultra</span>
+        <span class="product-pill">Redster</span>
+      </div>
+    </div>
   </div>
 </section>
 
