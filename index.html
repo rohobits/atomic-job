@@ -64,10 +64,92 @@
   nav a:hover { color: var(--red); }
 
   /* HERO */
+  .hero-wrap {
+    position: relative; overflow: hidden;
+    background: var(--warm);
+  }
   .hero {
+    position: relative; z-index: 2;
     min-height: 100vh; display: flex; flex-direction: column;
     justify-content: center; padding: 8rem 2rem 4rem;
     max-width: 1200px; margin: 0 auto;
+  }
+
+  /* Topographic backdrop */
+  .topo-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 1;
+    color: var(--dark);
+  }
+  .topo-bg path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1;
+    stroke-dasharray: 4000;
+    stroke-dashoffset: 4000;
+    animation: topoDraw 2.6s cubic-bezier(.2,.6,.2,1) forwards;
+  }
+  .topo-bg path:nth-child(1)  { animation-delay: 0.10s; }
+  .topo-bg path:nth-child(2)  { animation-delay: 0.18s; }
+  .topo-bg path:nth-child(3)  { animation-delay: 0.26s; }
+  .topo-bg path:nth-child(4)  { animation-delay: 0.34s; }
+  .topo-bg path:nth-child(5)  { animation-delay: 0.42s; }
+  .topo-bg path:nth-child(6)  { animation-delay: 0.50s; }
+  .topo-bg path:nth-child(7)  { animation-delay: 0.58s; }
+  .topo-bg path:nth-child(8)  { animation-delay: 0.66s; }
+  .topo-bg path:nth-child(9)  { animation-delay: 0.74s; }
+  .topo-bg path:nth-child(10) { animation-delay: 0.82s; }
+  @keyframes topoDraw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* Mountain mark ornament */
+  .mountain-mark {
+    width: 140px; height: 22px;
+    color: var(--red);
+    margin-bottom: 1.25rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+  .mountain-mark polyline {
+    fill: none; stroke: currentColor;
+    stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: mountainDraw 1.8s ease 0.6s forwards;
+  }
+  @keyframes mountainDraw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* Scroll cue */
+  .scroll-cue {
+    position: absolute; left: 50%; bottom: 2.5rem;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.75rem; opacity: 0;
+    animation: fadeUp 0.8s ease 1.4s forwards;
+    pointer-events: none;
+  }
+  .scroll-cue-label {
+    font-family: var(--mono); font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .scroll-cue-line {
+    position: relative; width: 1px; height: 48px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .scroll-cue-line::after {
+    content: ''; position: absolute;
+    left: 0; right: 0; top: -24px; height: 24px;
+    background: var(--red);
+    animation: scrollPulse 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(96px); }
   }
   .hero-label {
     font-family: var(--mono); font-size: 0.75rem;
@@ -258,8 +340,25 @@
 </nav>
 
 <!-- HERO -->
-<header class="hero">
+<div class="hero-wrap">
+  <svg class="topo-bg" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path style="opacity:0.16" d="M -50 720 Q 220 560, 480 620 T 980 600 Q 1180 590, 1450 640" />
+    <path style="opacity:0.14" d="M -50 680 Q 220 510, 500 580 T 1000 555 Q 1200 540, 1450 600" />
+    <path style="opacity:0.13" d="M -50 640 Q 220 460, 520 540 T 1020 510 Q 1220 490, 1450 560" />
+    <path style="opacity:0.12" d="M -50 600 Q 220 410, 540 500 T 1040 465 Q 1240 440, 1450 520" />
+    <path style="opacity:0.11" d="M -50 560 Q 220 360, 560 460 T 1060 420 Q 1260 390, 1450 480" />
+    <path style="opacity:0.10" d="M -50 520 Q 220 310, 580 420 T 1080 375 Q 1280 340, 1450 440" />
+    <path style="opacity:0.09" d="M -50 480 Q 220 260, 600 380 T 1100 330 Q 1300 290, 1450 400" />
+    <path style="opacity:0.08" d="M -50 440 Q 220 210, 620 340 T 1120 285 Q 1320 240, 1450 360" />
+    <path style="opacity:0.07" d="M -50 400 Q 220 160, 640 300 T 1140 240 Q 1340 190, 1450 320" />
+    <path style="opacity:0.06" d="M -50 360 Q 220 110, 660 260 T 1160 195 Q 1360 140, 1450 280" />
+  </svg>
+
+  <header class="hero">
   <div class="hero-label">Application &mdash; National Sales Manager, U.S.</div>
+  <svg class="mountain-mark" viewBox="0 0 140 22" aria-hidden="true">
+    <polyline points="0,21 18,9 32,16 48,3 64,12 80,6 94,14 110,8 128,17 140,12" />
+  </svg>
   <h1>Born on skis. <em>Built from the shop&nbsp;floor.</em></h1>
   <p class="hero-sub">
     I was born in Jackson Hole, raised in Steamboat, and put on skis almost as soon as I could walk. I later ran a dual-season ski and bike shop in Steamboat for five years, including buying, selling, renting, tuning, and fitting Atomic product from the shop floor. Today I manage a $40M+ territory across Colorado, Utah, Wyoming, and Montana for Trek. This is the case for why that path matters for Atomic.
@@ -282,7 +381,13 @@
       <div class="label">Born into ski country</div>
     </div>
   </div>
-</header>
+  </header>
+
+  <div class="scroll-cue" aria-hidden="true">
+    <span class="scroll-cue-label">Scroll</span>
+    <div class="scroll-cue-line"></div>
+  </div>
+</div>
 
 <div class="section-divider"></div>
 
