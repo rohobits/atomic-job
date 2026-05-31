@@ -986,16 +986,69 @@
   /* AHEAD CARDS */
   .ahead-grid {
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 2rem; margin-top: 3rem;
+    gap: 1.5rem; margin-top: 3rem;
   }
   .ahead-card {
     padding: 2rem; border: 1px solid var(--border);
-    transition: border-color 0.3s;
+    background: rgba(255,255,255,0.4);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.35s, transform 0.4s, box-shadow 0.4s;
   }
-  .ahead-card:hover { border-color: var(--red); }
+  .ahead-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--red);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s cubic-bezier(.2,.6,.2,1);
+  }
+  .ahead-card:hover {
+    border-color: var(--red);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px -16px rgba(13,13,13,0.18);
+  }
+  .ahead-card:hover::before { transform: scaleY(1); }
+  .ahead-card-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.1rem;
+  }
+  .ahead-card-icon {
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.6);
+    color: var(--red);
+    flex-shrink: 0;
+    transition: border-color 0.3s, background 0.3s, transform 0.4s;
+  }
+  .ahead-card:hover .ahead-card-icon {
+    border-color: var(--red);
+    background: rgba(196,30,58,0.06);
+    transform: rotate(-4deg);
+  }
+  .ahead-card-icon svg {
+    width: 20px; height: 20px;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+  .ahead-card-icon svg .filled { fill: currentColor; stroke: none; }
+  .ahead-card-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .ahead-card-num span { color: var(--red); }
   .ahead-card h3 {
-    font-family: var(--serif); font-size: 1.25rem;
-    color: var(--dark); margin-bottom: 0.75rem; line-height: 1.25;
+    font-family: var(--serif); font-size: 1.3rem;
+    color: var(--dark); margin-bottom: 0.8rem; line-height: 1.25;
   }
   .ahead-card p {
     font-size: 0.95rem; color: var(--text-light); line-height: 1.7;
@@ -1544,18 +1597,75 @@
   </div>
   <div class="ahead-grid">
     <div class="ahead-card">
+      <div class="ahead-card-header">
+        <div class="ahead-card-icon">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <circle cx="16" cy="16" r="11" />
+            <circle cx="16" cy="16" r="6" />
+            <circle class="filled" cx="16" cy="16" r="1.5" />
+            <line x1="16" y1="1" x2="16" y2="5" />
+            <line x1="16" y1="27" x2="16" y2="31" />
+            <line x1="1" y1="16" x2="5" y2="16" />
+            <line x1="27" y1="16" x2="31" y2="16" />
+          </svg>
+        </div>
+        <div class="ahead-card-num">Priority <span>01</span></div>
+      </div>
       <h3>Understanding the account base</h3>
       <p>The first priority is understanding where Atomic is strongest, where it is underrepresented, which dealers are true brand builders, and how to balance volume with premium distribution quality. Growth matters, but in a premium category, the quality of distribution matters just as much. I&rsquo;d want to spend my first weeks listening &mdash; meeting the reps, learning the relationships, and understanding the landscape before forming opinions.</p>
     </div>
     <div class="ahead-card">
+      <div class="ahead-card-header">
+        <div class="ahead-card-icon">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <line x1="6" y1="6" x2="16" y2="16" />
+            <line x1="26" y1="6" x2="16" y2="16" />
+            <line x1="6" y1="26" x2="16" y2="16" />
+            <line x1="26" y1="26" x2="16" y2="16" />
+            <circle class="filled" cx="6" cy="6" r="2.5" />
+            <circle class="filled" cx="26" cy="6" r="2.5" />
+            <circle class="filled" cx="6" cy="26" r="2.5" />
+            <circle class="filled" cx="26" cy="26" r="2.5" />
+            <circle class="filled" cx="16" cy="16" r="3.5" />
+          </svg>
+        </div>
+        <div class="ahead-card-num">Priority <span>02</span></div>
+      </div>
       <h3>Creating alignment across the rep force</h3>
       <p>A national sales role cannot depend on one person being good in the field. It requires clear priorities for reps: which accounts matter most, how the line should be positioned across different shop profiles, what the forecast needs to reflect, and how field intelligence gets back to leadership before it becomes stale. At Trek, I built the systems to manage this across 60+ accounts and four states. The principle scales &mdash; the tools just need to match the organization.</p>
     </div>
     <div class="ahead-card">
+      <div class="ahead-card-header">
+        <div class="ahead-card-icon">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M 26 16 A 10 10 0 1 1 16 6" />
+            <polyline points="16,3 16,6 19,7" />
+            <path d="M 6 16 A 10 10 0 0 1 16 6" stroke-opacity="0.35" />
+            <polyline points="13,25 16,26 14,29" stroke-opacity="0.35" />
+          </svg>
+        </div>
+        <div class="ahead-card-num">Priority <span>03</span></div>
+      </div>
       <h3>Improving sell-through, not just sell-in</h3>
       <p>A preseason order is only healthy if the dealer can move through it. That means staff education on the boot wall, assortment planning that matches the shop&rsquo;s customer base, rental and demo strategy that creates product trial, and reorder discipline that keeps the right sizes and models in stock through the season. This is the work I&rsquo;ve done for five years at retail and two years at the brand level. It&rsquo;s where I&rsquo;m most effective.</p>
     </div>
     <div class="ahead-card">
+      <div class="ahead-card-header">
+        <div class="ahead-card-icon">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <line x1="16" y1="5" x2="16" y2="27" />
+            <line x1="7" y1="10" x2="25" y2="10" />
+            <line x1="7" y1="10" x2="3" y2="18" />
+            <line x1="7" y1="10" x2="11" y2="18" />
+            <line x1="3" y1="18" x2="11" y2="18" />
+            <line x1="25" y1="10" x2="21" y2="18" />
+            <line x1="25" y1="10" x2="29" y2="18" />
+            <line x1="21" y1="18" x2="29" y2="18" />
+            <line x1="11" y1="27" x2="21" y2="27" />
+          </svg>
+        </div>
+        <div class="ahead-card-num">Priority <span>04</span></div>
+      </div>
       <h3>Balancing growth with premium positioning</h3>
       <p>Atomic has the credibility to grow, but the wrong growth can dilute the brand. The instinct should be to build from the right accounts outward &mdash; epicenter markets, specialty retailers who can tell the product story, and dealers who can represent the full winter sports portfolio with quality. I&rsquo;ve seen firsthand what happens when distribution gets ahead of sell-through capability, and I&rsquo;ve also seen what&rsquo;s possible when you invest in the accounts that are genuinely aligned with the brand.</p>
     </div>
