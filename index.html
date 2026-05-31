@@ -392,18 +392,29 @@
     align-items: start;
   }
   .territory-map-wrap {
-    border: 1px solid var(--border);
-    padding: 1.75rem 1.5rem 1.25rem;
-    background: rgba(255,255,255,0.45);
+    border: 1px solid #2A2A2D;
+    padding: 1.5rem 1.5rem 1.25rem;
+    background: #0F0F11;
     position: relative;
+    overflow: hidden;
+  }
+  .territory-map-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 60% 70%, rgba(196,30,58,0.06), transparent 65%);
+    pointer-events: none;
   }
   .territory-map-label {
     font-family: var(--mono);
     font-size: 0.65rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: rgba(245,242,237,0.55);
     margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
   }
   .territory-map-label span { color: var(--red); }
   .territory-map {
